@@ -1,0 +1,36 @@
+version: "3.6"
+
+services:
+  nojdbc-db:
+    build:
+      context: ./postgres-init/
+      dockerfile: Dockerfile-postgres
+    image: nojdbc-db
+    container_name: nojdbc-db
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Moscow
+    ports:
+      - "5488:5432"
+    networks:
+      - nojdbc-network
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "nojdbc", "-U", "nojdbc_user" ]
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+networks:
+  nojdbc-network:
+    name: nojdbc-network
+    driver: bridge

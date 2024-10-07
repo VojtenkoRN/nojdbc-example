@@ -1,0 +1,1 @@
+psql -U postgres -c "ALTER SYSTEM SET max_connections = 128" -c "ALTER SYSTEM SET max_locks_per_transaction = 256" -c "ALTER SYSTEM SET max_prepared_transactions = 128" -c "ALTER SYSTEM SET shared_buffers = '512MB'" -c "SELECT pg_reload_conf()"

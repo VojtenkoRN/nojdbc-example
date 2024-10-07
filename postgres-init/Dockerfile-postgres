@@ -1,0 +1,6 @@
+FROM postgres:14-bullseye
+
+ENV POSTGRES_PASSWORD=Na8mnmxN3rHV
+ENV TZ=Europe/Moscow
+
+ADD ./data/* /docker-entrypoint-initdb.d/

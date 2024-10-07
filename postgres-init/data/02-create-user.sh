@@ -1,0 +1,1 @@
+psql -h localhost -U postgres -tc "SELECT 1 FROM pg_user WHERE usename = 'nojdbc_user'" | grep -q 1 || psql -U postgres -c "CREATE USER nojdbc_user WITH ENCRYPTED PASSWORD 'hZcYMDmd7Yrd';"

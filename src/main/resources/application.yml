@@ -1,0 +1,23 @@
+quarkus:
+  log:
+    console:
+      enable: true
+      level: DEBUG
+    category:
+      '"nojdbc':
+        example":
+          level: DEBUG
+  datasource:
+    db-kind: postgresql
+    username: ${DATABASE_USERNAME:nojdbc_user}
+    password: ${DATABASE_PASSWORD:hZcYMDmd7Yrd}
+    jdbc:
+      url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5488}/${DATABASE_NAME:nojdbc}?currentSchema=nojdbc_local
+      acquisition-timeout: 15S
+  flyway:
+    default-schema: nojdbc_local
+    locations: db/migration,testdata
+    migrate-at-start: true
+    validate-on-migrate: true
+    ignore-missing-migrations: true
+    ignore-future-migrations: true
